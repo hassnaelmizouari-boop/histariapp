@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  api:
+    image: php:8.2-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - ./api:/var/www/html
+      - ./api/.htaccess:/var/www/html/.htaccess:ro
+    environment:
+      HISTARI_ALLOWED_ORIGIN: ${HISTARI_ALLOWED_ORIGIN:-*}
+      HISTARI_DB_HOST: ${HISTARI_DB_HOST:-sdb-e.hosting.stackcp.net}
+      HISTARI_DB_NAME: ${HISTARI_DB_NAME:-histaria_db-3138332e70}
+      HISTARI_DB_USER: ${HISTARI_DB_USER:-histadmin}
+      HISTARI_DB_PASSWORD: ${HISTARI_DB_PASSWORD:-g4:M,Xp^E8D>}
+      HISTARI_DB_CHARSET: ${HISTARI_DB_CHARSET:-utf8mb4}
+      HISTARI_ADMIN_EMAIL: ${HISTARI_ADMIN_EMAIL:-ADMIN}
+      HISTARI_ADMIN_PASSWORD: ${HISTARI_ADMIN_PASSWORD:-ADMIN}
+    env_file:
+      - ./api/.env
